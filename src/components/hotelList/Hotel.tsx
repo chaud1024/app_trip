@@ -5,15 +5,30 @@ import { Hotel as IHotel } from '@models/hotel'
 import Flex from '@shared/Flex'
 import ListRow from '@shared/ListRow'
 import Spacing from '@shared/Spacing'
+import Tag from '@shared/Tag'
 import Text from '@shared/Text'
 import addDelimiter from '@utils/addDelimiter'
 
 const Hotel = ({ hotel }: { hotel: IHotel }) => {
+  const tagComponent = () => {
+    if (hotel.events == null) {
+      return
+    }
+
+    const { name } = hotel.events
+    return (
+      <div>
+        <Tag>{name}</Tag>
+        <Spacing size={8} />
+      </div>
+    )
+  }
   return (
     <div>
       <ListRow
         contents={
           <Flex direction="column">
+            {tagComponent()}
             <ListRow.Texts
               title={hotel.name}
               subTitle={hotel.comment}
