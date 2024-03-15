@@ -7,10 +7,11 @@ import {
   startAfter,
 } from 'firebase/firestore'
 
-import { COLLECTIONS } from '@/constants'
+import { COLLECTIONS } from '@constants'
+import { Hotel } from '@models/hotel'
 import { store } from './firebase'
 
-export async function getHotels(pageParams?: QuerySnapshot<unknown>) {
+export async function getHotels(pageParams?: QuerySnapshot<Hotel>) {
   const hotelsQuery =
     pageParams == null
       ? query(collection(store, COLLECTIONS.HOTEL), limit(10))
@@ -21,10 +22,13 @@ export async function getHotels(pageParams?: QuerySnapshot<unknown>) {
         )
   const hotelsSnapshot = await getDocs(hotelsQuery)
 
-  const items = hotelsSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }))
+  const items = hotelsSnapshot.docs.map(
+    (doc) =>
+      ({
+        id: doc.id,
+        ...doc.data(),
+      }) as Hotel,
+  )
 
   const lastVisible = hotelsSnapshot.docs[hotelsSnapshot.docs.length - 1]
 
