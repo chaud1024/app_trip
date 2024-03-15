@@ -1,16 +1,16 @@
 import {
   collection,
+  getDocs,
   limit,
   query,
   QuerySnapshot,
   startAfter,
-  getDocs,
 } from 'firebase/firestore'
 
 import { COLLECTIONS } from '@/constants'
 import { store } from './firebase'
 
-export default async function getHotels(pageParams?: QuerySnapshot<unknown>) {
+export async function getHotels(pageParams?: QuerySnapshot<unknown>) {
   const hotelsQuery =
     pageParams == null
       ? query(collection(store, COLLECTIONS.HOTEL), limit(10))
