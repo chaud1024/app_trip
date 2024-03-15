@@ -22,5 +22,7 @@ export default function useHotels() {
     fetchNextPage()
   }, [hasNextPage, isFetching, fetchNextPage])
 
-  return { data, loadMore, isFetching, hasNextPage }
+  const hotels = data?.pages.map(({ items }) => items).flat()
+
+  return { data: hotels, loadMore, isFetching, hasNextPage }
 }
