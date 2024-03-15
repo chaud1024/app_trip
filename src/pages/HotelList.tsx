@@ -1,5 +1,5 @@
+import HotelItem from '@/components/hotelList/HotelItem'
 import useHotels from '@components/hotelList/hooks/useHotels'
-import Hotel from '@components/hotelList/Hotel'
 import Spacing from '@components/shared/Spacing'
 import Top from '@components/shared/Top'
 import { Fragment } from 'react'
@@ -23,7 +23,7 @@ const HotelList = () => {
         <ul>
           {hotels?.map((hotel, idx) => (
             <Fragment key={hotel.id}>
-              <Hotel hotel={hotel} />
+              <HotelItem hotel={hotel} />
               {hotels.length - 1 === idx ? null : (
                 <Spacing
                   size={8}

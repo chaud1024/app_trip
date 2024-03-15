@@ -13,7 +13,7 @@ import addDelimiter from '@utils/addDelimiter'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Hotel = ({ hotel }: { hotel: IHotel }) => {
+const HotelItem = ({ hotel }: { hotel: IHotel }) => {
   const [remainedTime, setRemainedTime] = useState(0)
 
   useEffect(() => {
@@ -110,4 +110,4 @@ const imageStyles = css`
   margin-left: 16px;
 `
 
-export default Hotel
+export default HotelItem
