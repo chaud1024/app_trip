@@ -1,5 +1,4 @@
 // Hotel UI card component
-
 import { css } from '@emotion/react'
 import { Hotel as IHotel } from '@models/hotel'
 import Flex from '@shared/Flex'
@@ -7,18 +6,58 @@ import ListRow from '@shared/ListRow'
 import Spacing from '@shared/Spacing'
 import Tag from '@shared/Tag'
 import Text from '@shared/Text'
+import { differenceInMilliseconds, parseISO } from 'date-fns'
+
+import formatTime from '@/utils/formatTime'
 import addDelimiter from '@utils/addDelimiter'
+import { useEffect, useState } from 'react'
 
 const Hotel = ({ hotel }: { hotel: IHotel }) => {
+  const [remainedTime, setRemainedTime] = useState(0)
+
+  useEffect(() => {
+    if (hotel.events == null || hotel.events.promoEndTime == null) {
+      return
+    }
+
+    const promoEndTime = hotel.events.promoEndTime
+
+    const timer = setInterval(() => {
+      const 남은초 = differenceInMilliseconds(
+        parseISO(promoEndTime),
+        new Date(),
+      )
+      if (남은초 < 0) {
+        clearInterval(timer)
+        return
+      }
+
+      setRemainedTime(남은초)
+    }, 1_000)
+
+    // 컴포넌트 언마운트시 timer종료
+    return () => {
+      clearInterval(timer)
+    }
+  }, [hotel.events])
+
   const tagComponent = () => {
     if (hotel.events == null) {
       return
     }
 
-    const { name } = hotel.events
+    const { name, tagThemeStyle } = hotel.events
+    const promotionText =
+      remainedTime > 0 ? ` - ${formatTime(remainedTime)} 남음` : ''
+
     return (
       <div>
-        <Tag>{name}</Tag>
+        <Tag
+          color={tagThemeStyle.fontColor}
+          backgroundColor={tagThemeStyle.backgroundColor}
+        >
+          {name.concat(promotionText)}
+        </Tag>
         <Spacing size={8} />
       </div>
     )
