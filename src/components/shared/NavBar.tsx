@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+import useUser from '@hooks/auth/useUser'
 import { colors } from '@styles/colorPalette'
 import Button from './Button'
 import Flex from './Flex'
@@ -11,15 +12,22 @@ const NavBar = () => {
   const showSignButton =
     ['/signup', 'signin'].includes(location.pathname) === false
 
-  // TODO: user
-  const user = null
+  const user = useUser()
 
   const renderButton = useCallback(() => {
     if (user != null) {
       return (
         <Link to="/my">
-          {/* TODO */}
-          <img src="" alt="" />
+          <img
+            src={
+              user.photoURL ??
+              'https://cdn3.iconfinder.com/data/icons/font-awesome-regular-1/512/circle-user-64.png'
+            }
+            alt="유저사진"
+            width={40}
+            height={40}
+            style={{ borderRadius: '50%' }}
+          />
         </Link>
       )
     }
@@ -37,7 +45,7 @@ const NavBar = () => {
 
   return (
     <Flex align="center" justify="space-between" css={navbarContainerStyles}>
-      <Link to="/">홈</Link>
+      <Link to="/">App_Trip</Link>
       {renderButton()}
     </Flex>
   )
