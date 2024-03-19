@@ -1,9 +1,8 @@
-import { HOTEL } from '@/mock/data'
-import { doc, getDocs, collection } from 'firebase/firestore'
+import { collection, doc, getDocs } from 'firebase/firestore'
 
-import { store } from './firebase'
 import { COLLECTIONS } from '@constants'
 import { Room } from '@models/room'
+import { store } from './firebase'
 
 export async function getRooms(hotelId: string) {
   const roomSnapshot = await getDocs(
