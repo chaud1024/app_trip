@@ -81,7 +81,16 @@ const HotelItem = ({ hotel }: { hotel: IHotel }) => {
             </Flex>
           }
           right={
-            <Flex direction="column" align="flex-end">
+            <Flex
+              direction="column"
+              align="flex-end"
+              style={{ position: 'relative' }}
+            >
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/user-interface-797/32/User_Interface_heart_love_valentine_save_favorite-64.png"
+                alt="save icon"
+                css={iconHeartStyles}
+              />
               <img
                 src={hotel.mainImageUrl}
                 alt={hotel.name}
@@ -108,6 +117,14 @@ const imageStyles = css`
   border-radius: 8px;
   object-fit: cover;
   margin-left: 16px;
+`
+
+const iconHeartStyles = css`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
 `
 
 export default HotelItem
