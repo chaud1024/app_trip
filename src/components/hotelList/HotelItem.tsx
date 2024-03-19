@@ -13,7 +13,7 @@ import addDelimiter from '@utils/addDelimiter'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const HotelItem = ({ hotel }: { hotel: IHotel }) => {
+const HotelItem = ({ hotel, isLike }: { hotel: IHotel; isLike: boolean }) => {
   const [remainedTime, setRemainedTime] = useState(0)
 
   useEffect(() => {
@@ -87,7 +87,11 @@ const HotelItem = ({ hotel }: { hotel: IHotel }) => {
               style={{ position: 'relative' }}
             >
               <img
-                src="https://cdn3.iconfinder.com/data/icons/user-interface-797/32/User_Interface_heart_love_valentine_save_favorite-64.png"
+                src={
+                  isLike
+                    ? 'https://cdn1.iconfinder.com/data/icons/andriod-app/32/bookmark-512.png'
+                    : 'https://cdn1.iconfinder.com/data/icons/andriod-app/32/bookmark_outline-64.png'
+                }
                 alt="save icon"
                 css={iconHeartStyles}
               />
@@ -121,8 +125,8 @@ const imageStyles = css`
 
 const iconHeartStyles = css`
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: -2px;
+  right: -5px;
   width: 30px;
   height: 30px;
 `
