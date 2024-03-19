@@ -1,8 +1,8 @@
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { css } from '@emotion/react'
 import Flex from '@shared/Flex'
 import Spacing from '@shared/Spacing'
 import Text from '@shared/Text'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import useShare from '@hooks/useShare'
 import { Hotel } from '@models/hotel'
@@ -17,7 +17,7 @@ const ActionButtons = ({ hotel }: { hotel: Hotel }) => {
       <Button
         label="찜하기"
         onClick={() => {}}
-        iconUrl="https://cdn3.iconfinder.com/data/icons/social-media-element/120/Save_Mark-64.png"
+        iconUrl="https://cdn3.iconfinder.com/data/icons/user-interface-797/32/User_Interface_heart_love_valentine_save_favorite-64.png"
       />
       <Button
         label="공유하기"
@@ -29,7 +29,7 @@ const ActionButtons = ({ hotel }: { hotel: Hotel }) => {
             buttonLabel: 'app_Trip에서 보기',
           })
         }}
-        iconUrl="https://cdn3.iconfinder.com/data/icons/social-network-flat-3/100/Kakao_Talk-64.png"
+        iconUrl="https://cdn0.iconfinder.com/data/icons/eon-social-media-contact-info-2/32/kakao_talk_chat_media_social-64.png"
       />
       <CopyToClipboard
         text={window.location.href}
