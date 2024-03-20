@@ -58,7 +58,9 @@ function App() {
 
 const Wrap = styled.div`
   max-width: 480px;
+  height: 100dvh;
   margin: 0 auto;
+  position: relative;
 `
 
 export default App
