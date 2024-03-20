@@ -10,10 +10,22 @@ import { differenceInMilliseconds, parseISO } from 'date-fns'
 
 import formatTime from '@/utils/formatTime'
 import addDelimiter from '@utils/addDelimiter'
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const HotelItem = ({ hotel, isLike }: { hotel: IHotel; isLike: boolean }) => {
+const HotelItem = ({
+  hotel,
+  isLike,
+  onLike,
+}: {
+  hotel: IHotel
+  isLike: boolean
+  onLike: ({
+    hotel,
+  }: {
+    hotel: Pick<IHotel, 'name' | 'id' | 'mainImageUrl'>
+  }) => void
+}) => {
   const [remainedTime, setRemainedTime] = useState(0)
 
   useEffect(() => {
@@ -63,6 +75,18 @@ const HotelItem = ({ hotel, isLike }: { hotel: IHotel; isLike: boolean }) => {
       </div>
     )
   }
+
+  const handleLike = (e: MouseEvent<HTMLImageElement>) => {
+    e.preventDefault()
+    onLike({
+      hotel: {
+        name: hotel.name,
+        mainImageUrl: hotel.mainImageUrl,
+        id: hotel.id,
+      },
+    })
+  }
+
   return (
     <div>
       <Link to={`/hotel/${hotel.id}`}>
@@ -93,7 +117,8 @@ const HotelItem = ({ hotel, isLike }: { hotel: IHotel; isLike: boolean }) => {
                     : 'https://cdn1.iconfinder.com/data/icons/andriod-app/32/bookmark_outline-64.png'
                 }
                 alt="save icon"
-                css={iconHeartStyles}
+                css={iconLikeStyle}
+                onClick={handleLike}
               />
               <img
                 src={hotel.mainImageUrl}
@@ -123,7 +148,7 @@ const imageStyles = css`
   margin-left: 16px;
 `
 
-const iconHeartStyles = css`
+const iconLikeStyle = css`
   position: absolute;
   top: -2px;
   right: -5px;

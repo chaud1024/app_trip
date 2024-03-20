@@ -8,11 +8,8 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 const HotelList = () => {
   const { data: hotels, hasNextPage, loadMore } = useHotels()
-  const { data: likes } = useLike()
+  const { data: likes, mutate: like } = useLike()
 
-  console.log('likes', likes)
-
-  console.log('hotels', hotels)
   return (
     <div>
       <Top title="인기 호텔" subTitle="호텔부터 펜션까지 최저가" />
@@ -32,6 +29,7 @@ const HotelList = () => {
                 isLike={Boolean(
                   likes?.find((like) => like.hotelId === hotel.id),
                 )}
+                onLike={like}
               />
               {hotels.length - 1 === idx ? null : (
                 <Spacing
