@@ -12,7 +12,7 @@ import ListRow from '@components/shared/ListRow'
 import { useEffect, useState } from 'react'
 
 const LikePage = () => {
-  const { data, isEdit, reorder } = useEditLike() // 찜한 호텔아이템 목록
+  const { data, isEdit, reorder, updatedLikesSave } = useEditLike() // 찜한 호텔아이템 목록
 
   const handleDragEndDrop = (result: DropResult) => {
     if (result.destination == null) {
@@ -61,7 +61,7 @@ const LikePage = () => {
         </StrictModeDroppable>
       </DragDropContext>
       {isEdit ? (
-        <FixedBottomButton label="저장하기" onClick={() => {}} />
+        <FixedBottomButton label="저장하기" onClick={updatedLikesSave} />
       ) : null}
     </div>
   )
