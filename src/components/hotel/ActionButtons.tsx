@@ -4,20 +4,36 @@ import Spacing from '@shared/Spacing'
 import Text from '@shared/Text'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import useShare from '@hooks/useShare'
 import { Hotel } from '@models/hotel'
+import useShare from '@hooks/useShare'
+import useLike from '@hooks/like/useLike'
 
 const ActionButtons = ({ hotel }: { hotel: Hotel }) => {
   const share = useShare()
+  const { data: likes, mutate: like } = useLike()
 
-  const { name, comment, mainImageUrl } = hotel
+  const { name, comment, mainImageUrl, id } = hotel
+
+  const isLike = Boolean(likes?.find((like) => like.hotelId === hotel.id))
 
   return (
     <Flex css={containerStyles}>
       <Button
         label="찜하기"
-        onClick={() => {}}
-        iconUrl="https://cdn3.iconfinder.com/data/icons/user-interface-797/32/User_Interface_heart_love_valentine_save_favorite-64.png"
+        onClick={() => {
+          like({
+            hotel: {
+              name,
+              mainImageUrl,
+              id,
+            },
+          })
+        }}
+        iconUrl={
+          isLike
+            ? 'https://cdn1.iconfinder.com/data/icons/andriod-app/32/bookmark-512.png'
+            : 'https://cdn1.iconfinder.com/data/icons/andriod-app/32/bookmark_outline-64.png'
+        }
       />
       <Button
         label="공유하기"
