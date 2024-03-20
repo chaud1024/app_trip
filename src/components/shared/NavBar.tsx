@@ -6,6 +6,7 @@ import useUser from '@hooks/auth/useUser'
 import { colors } from '@styles/colorPalette'
 import Button from './Button'
 import Flex from './Flex'
+import Spacing from './Spacing'
 
 const NavBar = () => {
   const location = useLocation()
@@ -17,18 +18,29 @@ const NavBar = () => {
   const renderButton = useCallback(() => {
     if (user != null) {
       return (
-        <Link to="/my">
-          <img
-            src={
-              user.photoURL ??
-              'https://cdn3.iconfinder.com/data/icons/font-awesome-regular-1/512/circle-user-64.png'
-            }
-            alt="유저사진"
-            width={40}
-            height={40}
-            style={{ borderRadius: '50%' }}
-          />
-        </Link>
+        <Flex align="center">
+          <Link to="/my">
+            <img
+              src={
+                user.photoURL ??
+                'https://cdn3.iconfinder.com/data/icons/font-awesome-regular-1/512/circle-user-64.png'
+              }
+              alt="유저사진"
+              width={40}
+              height={40}
+              style={{ borderRadius: '50%' }}
+            />
+          </Link>
+          <Spacing size={8} direction="horizontal" />
+          <Link to="/settings">
+            <img
+              src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/gear-setting-set-configure-configuration-64.png"
+              alt="setting icon"
+              width={40}
+              height={40}
+            />
+          </Link>
+        </Flex>
       )
     }
 
