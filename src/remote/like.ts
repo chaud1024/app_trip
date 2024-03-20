@@ -3,6 +3,7 @@ import { Hotel } from '@models/hotel'
 import { Like } from '@models/like'
 import {
   collection,
+  deleteDoc,
   doc,
   getDocs,
   limit,
@@ -10,6 +11,7 @@ import {
   query,
   setDoc,
   where,
+  writeBatch,
 } from 'firebase/firestore'
 import { store } from './firebase'
 
@@ -31,7 +33,7 @@ export async function getLikes({ userId }: { userId: string }) {
   )
 }
 
-async function toggleLike({
+export async function toggleLike({
   hotel,
   userId,
 }: {
@@ -49,6 +51,34 @@ async function toggleLike({
 
   // 이미 저장되어 있다 => 삭제
   if (findSnapshot.docs.length > 0) {
+    const removeTarget = findSnapshot.docs[0]
+    const removeTargetOrder = removeTarget.data().order
+
+    // 삭제하고자하는 아이템의 order보다 큰 아이템들의 배열
+    const updateTargetSnapshot = await getDocs(
+      query(
+        collection(store, COLLECTIONS.LIKE),
+        where('userId', '==', userId),
+        where('order', '>', removeTargetOrder),
+      ),
+    )
+
+    if (updateTargetSnapshot.empty) {
+      // 삭제하고자하는 아이템의 order보다 큰 아이템의 배열이 비어있다? => 바로 삭제
+      // (삭제하고자하는 아이템의 order가 마지막이었음)
+      return deleteDoc(removeTarget.ref)
+    } else {
+      const batch = writeBatch(store)
+
+      // 삭제하고자하는 아이템의 order보다 큰 아이템의 배열을 순회하며 해당 아이템 ref의 order를 1씩 줄임
+      updateTargetSnapshot.forEach((doc) => {
+        batch.update(doc.ref, { order: doc.data().order - 1 })
+      })
+
+      await batch.commit()
+
+      return deleteDoc(removeTarget.ref)
+    }
   } else {
     // 저장되어있지 않다 => 생성
 
