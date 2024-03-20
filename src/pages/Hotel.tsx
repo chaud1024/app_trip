@@ -1,12 +1,13 @@
-import { useParams } from 'react-router-dom'
-import useHotel from '@components/hotel/hook/useHotel'
-import Top from '@components/shared/Top'
+import ActionButtons from '@components/hotel/ActionButtons'
 import Carousel from '@components/hotel/Carousel'
-import Rooms from '@components/hotel/Rooms'
 import Contents from '@components/hotel/Contents'
+import useHotel from '@components/hotel/hook/useHotel'
 import Map from '@components/hotel/Map'
 import RecommendHotels from '@components/hotel/RecommendHotels'
-import ActionButtons from '@components/hotel/ActionButtons'
+import Review from '@components/hotel/Review'
+import Rooms from '@components/hotel/Rooms'
+import Top from '@components/shared/Top'
+import { useParams } from 'react-router-dom'
 
 const HotelPage = () => {
   const { id } = useParams() as { id: string }
@@ -30,6 +31,7 @@ const HotelPage = () => {
       <Contents contents={contents} />
       <Map location={location} />
       <RecommendHotels recommendHotels={recommendHotels} />
+      <Review hotelId={id} />
     </div>
   )
 }
