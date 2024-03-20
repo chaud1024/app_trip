@@ -3,25 +3,39 @@ import {
   Draggable,
   Droppable,
   DroppableProps,
+  DropResult,
 } from 'react-beautiful-dnd'
 
-import { useEffect, useState } from 'react'
+import FixedBottomButton from '@/components/shared/FixedBottomButton'
+import useEditLike from '@components/settings/like/hooks/useEditLike'
 import ListRow from '@components/shared/ListRow'
+import { useEffect, useState } from 'react'
 
 const LikePage = () => {
-  const data = [] // 찜한 호텔아이템 목록
+  const { data, isEdit, reorder } = useEditLike() // 찜한 호텔아이템 목록
+
+  const handleDragEndDrop = (result: DropResult) => {
+    if (result.destination == null) {
+      return
+    }
+
+    const from = result.source.index
+    const to = result.destination?.index
+
+    reorder(from, to)
+  }
   return (
     <div>
-      <DragDropContext onDragEnd={() => {}}>
+      <DragDropContext onDragEnd={handleDragEndDrop}>
         <StrictModeDroppable droppableId="likes">
           {(droppableProps) => (
             <ul
               ref={droppableProps.innerRef}
               {...droppableProps.droppableProps}
             >
-              {data?.map(() => {
+              {data?.map((like, idx) => {
                 return (
-                  <Draggable key={} draggableId={} index={}>
+                  <Draggable key={like.id} draggableId={like.id} index={idx}>
                     {(draggableProps) => (
                       <li
                         ref={draggableProps.innerRef}
@@ -30,7 +44,12 @@ const LikePage = () => {
                       >
                         <ListRow
                           as="div"
-                          contents={<ListRow.Texts title={} subTitle={} />}
+                          contents={
+                            <ListRow.Texts
+                              title={like.order}
+                              subTitle={like.hotelName}
+                            />
+                          }
                         />
                       </li>
                     )}
@@ -41,6 +60,9 @@ const LikePage = () => {
           )}
         </StrictModeDroppable>
       </DragDropContext>
+      {isEdit ? (
+        <FixedBottomButton label="저장하기" onClick={() => {}} />
+      ) : null}
     </div>
   )
 }
