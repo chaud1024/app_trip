@@ -8,6 +8,7 @@ import Flex from '@shared/Flex'
 import ListRow from '@shared/ListRow'
 import Spacing from '@shared/Spacing'
 import Text from '@shared/Text'
+import TextField from '../shared/TextField'
 
 const Review = ({ hotelId }: { hotelId: string }) => {
   const user = useUser()
@@ -60,13 +61,21 @@ const Review = ({ hotelId }: { hotelId: string }) => {
   }
 
   return (
-    <div style={{ margin: '40px 0' }}>
-      <Text bold={true} typography="t4" style={{ padding: '0 24px' }}>
+    <div style={{ padding: '40px 0' }}>
+      <Text bold={true} typography="t4" style={{ margin: '0 24px' }}>
         리뷰
       </Text>
       <Spacing size={16} />
       {reviewRows()}
-      {}
+      {user != null ? (
+        <div style={{ padding: '0 24px' }}>
+          <TextField />
+          <Spacing size={16} />
+          <Flex justify="flex-end">
+            <Button disabled={true}>작성</Button>
+          </Flex>
+        </div>
+      ) : null}
     </div>
   )
 }
