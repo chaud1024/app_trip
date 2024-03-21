@@ -12,7 +12,7 @@ import TextField from '../shared/TextField'
 
 const Review = ({ hotelId }: { hotelId: string }) => {
   const user = useUser()
-  const { data: reviews, isLoading, write } = useReview({ hotelId })
+  const { data: reviews, isLoading, write, remove } = useReview({ hotelId })
   const [text, setText] = useState('')
 
   const reviewRows = useCallback(() => {
@@ -51,7 +51,17 @@ const Review = ({ hotelId }: { hotelId: string }) => {
                 subTitle={format(review.createdAt, 'yyyy-MM-dd')}
               />
             }
-            right={review.userId === user?.uid ? <Button>삭제</Button> : null}
+            right={
+              review.userId === user?.uid ? (
+                <Button
+                  onClick={() => {
+                    remove({ reviewId: review.id, hotelId: review.hotelId })
+                  }}
+                >
+                  삭제
+                </Button>
+              ) : null
+            }
           />
         ))}
       </ul>
