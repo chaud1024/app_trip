@@ -5,6 +5,7 @@ import {
   getDocs,
   orderBy,
   query,
+  setDoc,
 } from 'firebase/firestore'
 import { store } from './firebase'
 
@@ -65,4 +66,15 @@ export async function getReviews({ hotelId }: { hotelId: string }) {
   }
 
   return results
+}
+
+// 리뷰 작성
+// 새로 작성하는 review데이터는 생성되면 id가 생기기 때문에 Review 모델에서 id를 제외
+export function writeReview(review: Omit<Review, 'id'>) {
+  const hotelRef = doc(store, COLLECTIONS.HOTEL, review.hotelId)
+  const reviewRef = doc(collection(hotelRef, COLLECTIONS.REVIEW))
+
+  // 리뷰가 작성되는 hotelRef를 먼저 찾고, 그 하위 컬렉션으로써 reviewRef를 만든다
+  // 그리고 그 reviewRef위치에 review데이터를 넣어 setDoc(저장)한다
+  return setDoc(reviewRef, review)
 }
