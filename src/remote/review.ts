@@ -1,5 +1,6 @@
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -77,4 +78,18 @@ export function writeReview(review: Omit<Review, 'id'>) {
   // 리뷰가 작성되는 hotelRef를 먼저 찾고, 그 하위 컬렉션으로써 reviewRef를 만든다
   // 그리고 그 reviewRef위치에 review데이터를 넣어 setDoc(저장)한다
   return setDoc(reviewRef, review)
+}
+
+// 리뷰 삭제
+export function removeReview({
+  hotelId,
+  reviewId,
+}: {
+  hotelId: string
+  reviewId: string
+}) {
+  const hotelRef = doc(store, COLLECTIONS.HOTEL, hotelId)
+  const reviewRef = doc(collection(hotelRef, COLLECTIONS.REVIEW), reviewId)
+
+  return deleteDoc(reviewRef)
 }
