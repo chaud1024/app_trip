@@ -1,6 +1,12 @@
 import styled from '@emotion/styled'
 import { colors } from '@styles/colorPalette'
-import { differenceInDays, format, isSameDay, parseISO } from 'date-fns'
+import {
+  addDays,
+  differenceInDays,
+  format,
+  isSameDay,
+  parseISO,
+} from 'date-fns'
 import { ko } from 'date-fns/locale'
 import { DateRange, DayPicker } from 'react-day-picker'
 
@@ -45,6 +51,7 @@ const RangePicker = ({ startDate, endDate, onChange }: RangePickerProps) => {
         defaultMonth={today}
         onSelect={handleDayClick}
         selected={selected}
+        disabled={{ before: addDays(new Date(), 1) }}
       />
     </Container>
   )
@@ -91,12 +98,18 @@ const Container = styled.div`
             position: relative;
             width: 100%;
             line-height: 45px;
+
+            &[disabled] {
+              color: ${colors.gray200};
+            }
+
             &.rdp-day_selected {
               background-color: ${colors.blue100};
 
               &.rdp-day_range_start,
               &.rdp-day_range_end {
                 color: ${colors.white};
+
                 &::after {
                   display: block;
                   content: '';
