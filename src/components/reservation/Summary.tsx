@@ -42,10 +42,10 @@ const Summary = ({
             <Text typography="t6">{`${startDate} - ${endDate} (${nights}박)`}</Text>
           </Flex>
 
-          {Object.keys(room.basicInfo).map((key) => {
+          {Object.keys(room.basicInfo).map((key, idx) => {
             if (key in INFO_LABEL_MAP) {
               return (
-                <Flex as="li" justify="space-between">
+                <Flex as="li" justify="space-between" key={idx}>
                   <Text color="gray600" typography="t6">
                     {INFO_LABEL_MAP[key as keyof typeof INFO_LABEL_MAP]}
                   </Text>
