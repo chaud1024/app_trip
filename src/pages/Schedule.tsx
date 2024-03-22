@@ -16,11 +16,11 @@ const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState<{
     startDate?: string
     endDate?: string
-    night: number
+    nights: number
   }>({
     startDate: undefined,
     endDate: undefined,
-    night: 0,
+    nights: 0,
   })
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const SchedulePage = () => {
     selectedDate.startDate != null && selectedDate.endDate != null
 
   const buttonLabel = 제출가능한가
-    ? `${selectedDate.startDate} - ${selectedDate.endDate} (${selectedDate.night}박)`
+    ? `${selectedDate.startDate} - ${selectedDate.endDate} (${selectedDate.nights}박)`
     : '예약 날짜를 선택해주세요'
 
   return (
@@ -57,7 +57,7 @@ const SchedulePage = () => {
           setSelectedDate({
             startDate: dateRange.from,
             endDate: dateRange.to,
-            night: dateRange.night,
+            nights: dateRange.nights,
           })
         }}
       />
