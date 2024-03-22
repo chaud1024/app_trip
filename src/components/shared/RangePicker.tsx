@@ -7,7 +7,7 @@ import { DateRange, DayPicker } from 'react-day-picker'
 interface RangePickerProps {
   startDate?: string
   endDate?: string
-  onChange: (dateRange: { from?: string; to?: string; night: number }) => void
+  onChange: (dateRange: { from?: string; to?: string; nights: number }) => void
 }
 
 const RangePicker = ({ startDate, endDate, onChange }: RangePickerProps) => {
@@ -19,8 +19,6 @@ const RangePicker = ({ startDate, endDate, onChange }: RangePickerProps) => {
     }
     const { from, to } = dateRange
 
-    console.log(dateRange)
-
     // 중복된 날짜인 경우
     if (from && to && isSameDay(from, to)) {
       return
@@ -29,7 +27,7 @@ const RangePicker = ({ startDate, endDate, onChange }: RangePickerProps) => {
     onChange({
       from: from != null ? format(from, 'yyyy-MM-dd') : undefined,
       to: to != null ? format(to, 'yyyy-MM-dd') : undefined,
-      night: from && to ? differenceInDays(to, from) : 0,
+      nights: from && to ? differenceInDays(to, from) : 0,
     })
   }
 
