@@ -20,8 +20,6 @@ const HotelPage = () => {
 
   const { name, comment, images, contents, location, recommendHotels } = data
 
-  console.log(data)
-
   return (
     <div>
       <Top title={name} subTitle={comment} />
