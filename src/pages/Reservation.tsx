@@ -1,9 +1,11 @@
 import { parse } from 'qs'
 import { useEffect } from 'react'
 
+import Form from '@components/reservation/Form'
 import useReservation from '@components/reservation/hooks/useReservation'
 import Summary from '@components/reservation/Summary'
 import Spacing from '@shared/Spacing'
+import addDelimiter from '@/utils/addDelimiter'
 
 const ReservationPage = () => {
   const { hotelId, roomId, startDate, endDate, nights } = parse(
@@ -35,6 +37,10 @@ const ReservationPage = () => {
 
   const { hotel, room } = data
 
+  const handleSubmit = () => {}
+
+  const buttonLabel = `${nights}박 ${addDelimiter(room.price * Number(nights))}원 예약하기`
+
   return (
     <div>
       <Summary
@@ -45,6 +51,11 @@ const ReservationPage = () => {
         nights={nights}
       />
       <Spacing size={8} backgroundColor="gray100" />
+      <Form
+        onSubmit={handleSubmit}
+        forms={hotel.forms}
+        buttonLabel={buttonLabel}
+      />
     </div>
   )
 }
