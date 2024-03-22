@@ -1,19 +1,24 @@
-import styled from '@emotion/styled'
 import { css } from '@emotion/react'
+import styled from '@emotion/styled'
+import qs from 'qs'
 import useRooms from './hook/useRooms'
 
-import Flex from '@shared/Flex'
-import Text from '@shared/Text'
-import ListRow from '@shared/ListRow'
-import Tag from '@shared/Tag'
-import Spacing from '@shared/Spacing'
+import { useAlertContext } from '@context/AlertContext'
+import useUser from '@hooks/auth/useUser'
 import Button from '@shared/Button'
+import Flex from '@shared/Flex'
+import ListRow from '@shared/ListRow'
+import Spacing from '@shared/Spacing'
+import Tag from '@shared/Tag'
+import Text from '@shared/Text'
 import addDelimiter from '@utils/addDelimiter'
+import { useNavigate } from 'react-router-dom'
 
 const Rooms = ({ hotelId }: { hotelId: string }) => {
   const { data } = useRooms({ hotelId })
-
-  console.log('data', data)
+  const user = useUser()
+  const { open } = useAlertContext()
+  const navigate = useNavigate()
 
   return (
     <Container>
@@ -29,6 +34,11 @@ const Rooms = ({ hotelId }: { hotelId: string }) => {
         {data?.map((room, idx) => {
           const 마감임박인가 = room.avaliableCount === 1
           const 매진인가 = room.avaliableCount === 0
+
+          const params = qs.stringify(
+            { roomId: room.id, hotelId },
+            { addQueryPrefix: true },
+          )
 
           return (
             <ListRow
@@ -59,7 +69,24 @@ const Rooms = ({ hotelId }: { hotelId: string }) => {
                 />
               }
               right={
-                <Button size="medium" disabled={매진인가}>
+                <Button
+                  size="medium"
+                  disabled={매진인가}
+                  onClick={() => {
+                    if (user == null) {
+                      // 로그인 전
+                      open({
+                        title: '로그인 후 예약가능합니다.',
+                        onButtonClick: () => {
+                          navigate('/signin')
+                        },
+                      })
+                      return
+                    }
+
+                    navigate(`/schedule${params}`)
+                  }}
+                >
                   {매진인가 === true ? '매진' : '선택'}
                 </Button>
               }
