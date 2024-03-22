@@ -11,6 +11,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AuthGuard from '@components/auth/AuthGuard'
 import PrivateRoute from '@components/auth/PrivateRoute'
 import useLoadKakao from '@hooks/useLoadKakao'
+import ReservationPage from '@pages/Reservation'
+import SchedulePage from '@pages/Schedule'
 import NavBar from '@shared/NavBar'
 
 function App() {
@@ -45,6 +47,22 @@ function App() {
               element={
                 <PrivateRoute>
                   <LikePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/schedule"
+              element={
+                <PrivateRoute>
+                  <SchedulePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/reservation"
+              element={
+                <PrivateRoute>
+                  <ReservationPage />
                 </PrivateRoute>
               }
             />
