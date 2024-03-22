@@ -11,7 +11,6 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
 
   // 유저인증상태정보변화 감지
   onAuthStateChanged(auth, (user) => {
-    console.log('hi')
     if (user == null) {
       setUser(null)
     } else {
