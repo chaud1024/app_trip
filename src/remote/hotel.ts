@@ -1,6 +1,7 @@
 import {
   collection,
   doc,
+  documentId,
   getDoc,
   getDocs,
   limit,
@@ -8,11 +9,11 @@ import {
   QuerySnapshot,
   startAfter,
   where,
-  documentId,
 } from 'firebase/firestore'
 
 import { COLLECTIONS } from '@constants'
 import { Hotel } from '@models/hotel'
+import { Room } from '@models/room'
 import { store } from './firebase'
 
 export async function getHotels(pageParams?: QuerySnapshot<Hotel>) {
@@ -63,4 +64,23 @@ export async function getRecommendHotels(hotelIds: string[]) {
         ...doc.data(),
       }) as Hotel,
   )
+}
+
+// 호텔과 객실의 정보를 모두 가져오는 함수
+export async function getHotelWithRoom({
+  hotelId,
+  roomId,
+}: {
+  hotelId: string
+  roomId: string
+}) {
+  const hotelSnapshot = await getDoc(doc(store, COLLECTIONS.HOTEL, hotelId))
+  const roomSnapshot = await getDoc(
+    doc(hotelSnapshot.ref, COLLECTIONS.ROOM, roomId),
+  )
+
+  return {
+    hotel: hotelSnapshot.data() as Hotel,
+    room: roomSnapshot.data() as Room,
+  }
 }
