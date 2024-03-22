@@ -83,6 +83,41 @@ const Container = styled.div`
       color: ${colors.gray400};
       font-weight: bold;
     }
+
+    .rdp-tbody {
+      .rdp-row {
+        height: 45px;
+
+        .rdp-cell {
+          .rdp-button {
+            position: relative;
+            width: 100%;
+            line-height: 45px;
+            &.rdp-day_selected {
+              background-color: ${colors.blue100};
+
+              &.rdp-day_range_start,
+              &.rdp-day_range_end {
+                color: ${colors.white};
+                &::after {
+                  display: block;
+                  content: '';
+                  width: calc(100% - 1px);
+                  height: 45px;
+                  background-color: ${colors.blue};
+                  position: absolute;
+                  top: 50%;
+                  bottom: 0;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  z-index: -1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `
 
