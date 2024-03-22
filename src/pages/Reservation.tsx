@@ -51,6 +51,8 @@ const ReservationPage = () => {
       hotelId,
       roomId,
       startDate,
+      endDate,
+      nights: Number(nights),
       price: room.price * Number(nights),
       formValues,
     }
