@@ -6,13 +6,18 @@ import {
   DropResult,
 } from 'react-beautiful-dnd'
 
-import FixedBottomButton from '@/components/shared/FixedBottomButton'
 import useEditLike from '@components/settings/like/hooks/useEditLike'
-import ListRow from '@components/shared/ListRow'
+import Button from '@shared/Button'
+import FixedBottomButton from '@shared/FixedBottomButton'
+import Flex from '@shared/Flex'
+import ListRow from '@shared/ListRow'
+import Spacing from '@shared/Spacing'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const LikePage = () => {
   const { data, isEdit, reorder, updatedLikesSave } = useEditLike() // 찜한 호텔아이템 목록
+  const navigate = useNavigate()
 
   const handleDragEndDrop = (result: DropResult) => {
     if (result.destination == null) {
@@ -24,6 +29,24 @@ const LikePage = () => {
 
     reorder(from, to)
   }
+
+  console.log(data)
+
+  if (data == null || data.length === 0) {
+    return (
+      <Flex
+        direction="column"
+        justify="center"
+        align="center"
+        style={{ marginTop: 100 }}
+      >
+        <div>아직 찜한 호텔이 없습니다.</div>
+        <Spacing size={20} />
+        <Button onClick={() => navigate('/hotel')}>호텔 둘러보기</Button>
+      </Flex>
+    )
+  }
+
   return (
     <div>
       <DragDropContext onDragEnd={handleDragEndDrop}>
