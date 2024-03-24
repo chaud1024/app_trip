@@ -4800,6 +4800,7 @@ __metadata:
     react-query: "npm:^3.39.3"
     react-router-dom: "npm:^6.22.3"
     react-scripts: "npm:5.0.1"
+    react-virtuoso: "npm:^4.7.4"
     recoil: "npm:^0.7.7"
     swiper: "npm:^11.0.7"
     typescript: "npm:^4.4.2"
@@ -13259,6 +13260,16 @@ __metadata:
   bin:
     react-scripts: bin/react-scripts.js
   checksum: 10c0/1776e7139261019eb4a2adece8fb997913040c6b4e9170902ffed95c3ff311ded623189bb1582ecddb3a5a15d6afd871fb68dbed72080d50f635e31c4ff5fff5
+  languageName: node
+  linkType: hard
+
+"react-virtuoso@npm:^4.7.4":
+  version: 4.7.4
+  resolution: "react-virtuoso@npm:4.7.4"
+  peerDependencies:
+    react: ">=16 || >=17 || >= 18"
+    react-dom: ">=16 || >=17 || >= 18"
+  checksum: 10c0/d2943fc1696f8da1cf84cd33b0f0b86f0e59391c5c5ca4c9ce0fa8c0835f0f3652e6e812934b50861c6d224d3f13f1432333ca91dd9aa93d89b585ecf22696ab
   languageName: node
   linkType: hard
 
