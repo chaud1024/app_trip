@@ -1,3 +1,4 @@
+import SEO from '@/components/shared/SEO'
 import ActionButtons from '@components/hotel/ActionButtons'
 import Carousel from '@components/hotel/Carousel'
 import Contents from '@components/hotel/Contents'
@@ -24,6 +25,7 @@ const HotelPage = () => {
 
   return (
     <div>
+      <SEO title={name} description={comment} image={images[0]} />
       <ScrollProgressBar style={ScrollProgressBarStyle} />
       <Top title={name} subTitle={comment} />
       <Carousel images={images} />
