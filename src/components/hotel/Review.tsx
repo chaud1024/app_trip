@@ -66,7 +66,7 @@ const Review = ({ hotelId }: { hotelId: string }) => {
         ))}
       </ul>
     )
-  }, [reviews, user])
+  }, [reviews, user, remove])
 
   const handleTextChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
