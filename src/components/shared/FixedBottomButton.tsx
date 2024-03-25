@@ -55,6 +55,8 @@ const Container = styled.div`
 
 const buttonStyle = css`
   border-radius: 8px;
+  max-width: 480px;
+  margin: 0 auto;
 `
 
 export default FixedBottomButton
