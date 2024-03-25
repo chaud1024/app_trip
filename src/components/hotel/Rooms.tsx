@@ -7,6 +7,7 @@ import { useAlertContext } from '@context/AlertContext'
 import useUser from '@hooks/auth/useUser'
 import Button from '@shared/Button'
 import Flex from '@shared/Flex'
+import withSuspense from '@shared/hocs/withSuspense'
 import ListRow from '@shared/ListRow'
 import Spacing from '@shared/Spacing'
 import Tag from '@shared/Tag'
@@ -114,4 +115,6 @@ const imageStyles = css`
   border-radius: 4px;
 `
 
-export default Rooms
+export default withSuspense(Rooms, {
+  fallback: <div>객실정보 불러오는 중 ...</div>,
+})

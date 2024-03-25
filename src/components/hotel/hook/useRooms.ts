@@ -1,11 +1,11 @@
 import { Room } from '@models/room'
-import { useQuery, useQueryClient } from 'react-query'
+import { collection, doc, onSnapshot } from 'firebase/firestore'
 import { useEffect } from 'react'
-import { onSnapshot, collection, doc } from 'firebase/firestore'
+import { useQuery, useQueryClient } from 'react-query'
 
+import { COLLECTIONS } from '@constants'
 import { store } from '@remote/firebase'
 import { getRooms } from '@remote/room'
-import { COLLECTIONS } from '@constants'
 
 function useRooms({ hotelId }: { hotelId: string }) {
   const client = useQueryClient()
@@ -28,7 +28,9 @@ function useRooms({ hotelId }: { hotelId: string }) {
     }
   }, [hotelId, client])
 
-  return useQuery(['rooms', hotelId], () => getRooms(hotelId))
+  return useQuery(['rooms', hotelId], () => getRooms(hotelId), {
+    suspense: true,
+  })
 }
 
 export default useRooms
