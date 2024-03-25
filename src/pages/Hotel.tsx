@@ -41,7 +41,7 @@ const HotelPage = () => {
 
 const ScrollProgressBarStyle = css`
   position: sticky;
-  top: 62px;
+  top: 54px;
   z-index: 2;
 `
 
