@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+# 패스트캠퍼스 ⌈ 고성능 대규모 프론트엔드 10개 프로젝트 ⌋ 수강
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 개요
 
-## Available Scripts
+가상의 호텔 예약 사이트 프로젝트로, React를 사용하여 개발했습니다. Firebase를 활용하여 호텔 데이터와 각 호텔의 예약 가능한 객실 정보를 저장하고, 실시간으로 객실 예약 상태를 업데이트했습니다. 또한, 무한스크롤을 통해 호텔 목록을 보여주고, 호텔마다 저장(찜하기)기능을 통해 사용자가 호텔을 저장하고 그 목록을 볼 수 있도록 합니다. Firebase Authentication을 통해 구글 로그인 기능을 추가하여 사용자 인증을 처리했습니다. Emotion을 이용하여 유연하면서도 확장성 있는 UI를 디자인했습니다. 호텔 상세화면에서는 구글맵, 리뷰작성, 카카오톡 공유 및 링크복사 기능을 제공합니다.
 
-In the project directory, you can run:
+## 주요 기능
 
-### `yarn start`
+- 호텔 예약 기능: 사용자가 호텔을 예약할 때마다 실시간으로 객실 예약 상태가 업데이트되어 남은 객실을 실시간으로 확인할 수 있습니다.
+- 구글 로그인: Firebase Authentication을 통해 구글 로그인 기능을 추가하여 사용자의 편리한 로그인을 지원했습니다.
+- 호텔 찜하기 기능 : 로그인한 사용자가 호텔을 찜하고 그 목록을 볼 수 있습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 프로젝트 구조
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- components 폴더 : UI 컴포넌트
+- remote 폴더 : Firebase에서 데이터를 가져오는 로직
+- hooks 폴더 : 가져온 데이터를 처리하는 비즈니스 로직
 
-### `yarn test`
+## 사용 기술
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- Firebase (Firestore, Authentication)
+- Emotion
 
-### `yarn build`
+  ### 배포링크
+  [프로젝트 배포 링크](https://app-trip.vercel.app/).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
