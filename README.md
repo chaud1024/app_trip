@@ -22,6 +22,6 @@
 - Firebase (Firestore, Authentication)
 - Emotion
 
-  ### 배포링크
-  [프로젝트 배포 링크](https://app-trip.vercel.app/).
+### 배포링크
+  [App_Trip 바로가기](https://app-trip.vercel.app/).
 
